@@ -7,8 +7,25 @@ const isVenio=m=>m?.id==='venio-c'&&m?.status==='illustrative_normative_scenario
 const short=n=>{if(n===null||n===undefined)return '—';return n>=60?`${num(n/60,1)} мин`:`${num(n,0)} с`;};
 const TABS=[['overview','▦','Обзор'],['map','↣','КПСЦ / AS-IS'],['floor','▤','Планировка'],['parameters','≡','Параметры'],['scenarios','◫','Сценарии'],['finance','₽','Экономика'],['sources','◎','Источники'],['method','◈','Методика']];
 const state={model:null,initial:null,baseline:null,result:null,comparison:null,view:'overview',selected:'o8',baselineResult:null,loading:false,dirty:false,showStage:'current',running:false};
+const WORKSPACE_KEY='processlab.workspace.v1';
 let toastTimer;
-function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('open');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('open'),4000);}
+function toast(msg){const el=$('#toast');if(!el)return;el.textContent=msg;el.classList.add('open');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('open'),4000);}
+function persistWorkspace(){
+ try{localStorage.setItem(WORKSPACE_KEY,JSON.stringify({model:state.model,initial:state.initial,baseline:state.baseline,view:state.view,selected:state.selected,showStage:state.showStage}));}
+ catch(_){toast('Не удалось сохранить данные в памяти этого браузера. Используйте экспорт JSON.');}
+}
+async function restoreWorkspace(fallback){
+ try{
+  const saved=JSON.parse(localStorage.getItem(WORKSPACE_KEY)||'null');
+  if(!saved?.model||!saved?.baseline)return false;
+  await api('validate',saved.model);await api('validate',saved.baseline);
+  state.initial=saved.initial||clone(fallback);state.model=saved.model;state.baseline=saved.baseline;
+  state.view=TABS.some(tab=>tab[0]===saved.view)?saved.view:'overview';
+  state.selected=state.model.nodes.some(node=>node.id===saved.selected)?saved.selected:(state.model.nodes.find(node=>node.kind==='operation')?.id||'o8');
+  state.showStage=['current','ideal','target'].includes(saved.showStage)?saved.showStage:'current';
+  return true;
+ }catch(_){try{localStorage.removeItem(WORKSPACE_KEY);}catch(__){}return false;}
+}
 async function api(endpoint,body){
  const options={credentials:'same-origin'};
  if(body!==undefined){options.method='POST';options.headers={'Content-Type':'application/json'};options.body=JSON.stringify(body);}
@@ -30,12 +47,16 @@ function renderLogin(error=''){
 async function init(){
  try{
  const auth=await api('session');if(!auth.authenticated){renderLogin();return;}
- if(!state.model){state.initial=await api('demo');state.model=clone(state.initial);state.baseline=clone(state.initial);}
- await run(true);if(!state.baselineResult)state.baselineResult=clone(state.result);render();
+ if(!state.model){const demo=await api('demo');if(!await restoreWorkspace(demo)){state.initial=demo;state.model=clone(demo);state.baseline=clone(demo);}}
+ if(JSON.stringify(state.model)!==JSON.stringify(state.baseline)){
+  state.comparison=await api('compare',{baseline:state.baseline,scenario:state.model});
+  state.result=state.comparison.scenario;state.baselineResult=state.comparison.baseline;
+ }else{await run(true);state.baselineResult=clone(state.result);}
+ persistWorkspace();render();
  }catch(err){$('#app').innerHTML=`<div class="loading-screen">Не удалось открыть проект: ${esc(err.message)}<p>Для запуска: <code>python -m backend.server</code></p></div>`;}
 }
 function shell(){
- return `<aside class="sidebar"><div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 18l6-7 4 4 8-10M15 5h6v6"/></svg></div><div class="brand-label"><b>PROCESS LAB</b><small>DIGITAL TWIN STUDIO</small></div></div><div class="nav-caption">Рабочая область</div><nav aria-label="Разделы приложения">${TABS.map(([id,icon,title])=>`<button class="nav-item ${state.view===id?'active':''}" data-view="${id}"><span class="miniicon">${icon}</span><span class="nav-text">${title}</span></button>`).join('')}</nav><div class="nav-end"><p>PROCESS LAB · Версия 4.1<br>МУ ФЦК №17-2023<br>Демо, не промышленная система</p><button data-action="logout">↪ Выйти</button></div></aside><div class="shell"><header class="topbar"><div class="breadcrumb">Проекты / <strong>${esc(TABS.find(a=>a[0]===state.view)?.[2]||'Обзор')}</strong></div><div class="topbar-actions"><span class="topbar-status"><i class="status-dot"></i>Демо · локально</span>${btn('↓ <span class="hide-mobile">Экспорт JSON</span>','export','small')}${btn('↑ <span class="hide-mobile">Импорт</span>','import','small')}${btn('▶ <span class="hide-mobile">Рассчитать</span>','run','small primary')}</div></header><main class="main">${renderPage()}<p class="footer-note">PROCESS LAB · Сценарная модель, не измеренный цифровой двойник предприятия. Данные не отправляются во внешние сервисы. 3D-тур не реализован в рамках MVP направления A.</p></main></div>`;
+ return `<aside class="sidebar"><div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 18l6-7 4 4 8-10M15 5h6v6"/></svg></div><div class="brand-label"><b>PROCESS LAB</b><small>DIGITAL TWIN STUDIO</small></div></div><div class="nav-caption">Рабочая область</div><nav aria-label="Разделы приложения">${TABS.map(([id,icon,title])=>`<button class="nav-item ${state.view===id?'active':''}" data-view="${id}"><span class="miniicon">${icon}</span><span class="nav-text">${title}</span></button>`).join('')}</nav><div class="nav-end"><p>PROCESS LAB · Версия 4.1<br>МУ ФЦК №17-2023<br>Демо, не промышленная система</p><button data-action="logout">↪ Выйти</button></div></aside><div class="shell"><header class="topbar"><div class="breadcrumb">Проекты / <strong>${esc(TABS.find(a=>a[0]===state.view)?.[2]||'Обзор')}</strong></div><div class="topbar-actions"><span class="topbar-status"><i class="status-dot"></i>Демо · сохранение в браузере</span>${btn('↓ <span class="hide-mobile">Экспорт JSON</span>','export','small')}${btn('↑ <span class="hide-mobile">Импорт</span>','import','small')}${btn('▶ <span class="hide-mobile">Рассчитать</span>','run','small primary')}</div></header><main class="main">${renderPage()}<p class="footer-note">PROCESS LAB · Сценарная модель, не измеренный цифровой двойник предприятия. Данные не отправляются во внешние сервисы. 3D-тур не реализован в рамках MVP направления A.</p></main></div>`;
 }
 function render(){if(!state.model)return;$('#app').innerHTML=shell();}
 function renderPage(){switch(state.view){case 'map':return mapView();case 'floor':return floorView();case 'parameters':return parameterView();case 'scenarios':return scenarioView();case 'finance':return financeView();case 'sources':return sourcesView();case 'method':return methodView();default:return overviewView();}}
@@ -106,7 +127,7 @@ function mapView(){
  const current=stage==='current',shown=current?state.baseline:state.model;
  const selector=`<select class="search-field" style="width:190px" id="stage-select"><option value="current" ${stage==='current'?'selected':''}>AS-IS · текущая</option><option value="ideal" ${stage==='ideal'?'selected':''}>IDEAL · идеальная</option><option value="target" ${stage==='target'?'selected':''}>TO-BE · целевая</option></select>`;
  if(stage==='ideal')return `${header('МУ-17-2023 · ИДЕАЛЬНЫЙ ПОТОК','Идеальное состояние ещё не рассчитано','Методика требует прогнозов, исходной КПСЦ, выявления потерь и обоснованных целевых KPI.',btn('Вопросы и источники','goto-sources','primary'))}${disclaimer()}${panel('IDEAL · обязательное методическое разграничение','Это не та же карта, что исходная КПСЦ',`<div class="section-row">${selector}</div><div class="empty">Полноценная идеальная карта пока не может быть достоверно составлена: нет фактических CT, НЗП, транспортировок и измеренного ВПП. Она должна быть построена после обследования, а не заполнена придуманными «идеальными» цифрами.</div><p class="desc" style="margin-top:18px">Промежуточный результат: отдельный документ <b>analysis/03_ideal_target_and_kpsc.md</b> фиксирует критерии идеального состояния и перечень недостающих измерений.</p>`)}`;
- return `${header('МУ-17-2023 · КАРТИРОВАНИЕ','Карта потока создания ценности',state.model.status==='synthetic_demo'?'Изображён синтетический маршрут. Вы можете добавить собственные операции и связи; это не карта обследованного предприятия.':'Разделяем материальные объекты и управление информацией. Технологические связи требуют экспертного подтверждения.',(current?btn('Перейти к TO-BE','goto-target','primary'):btn('＋ Добавить операцию','add-operation','')+btn('↳ Добавить связь','add-edge','')+btn('⊖ Удалить связь','remove-edge','')+btn('▶ Симуляция','run','primary')))}${disclaimer()}<div class="card"><div class="section-row"><div><h2 class="card-title">КПСЦ · ${stage==='current'?'AS-IS · исходная модель (базис)':stage==='ideal'?'идеальное состояние (концепция)':'TO-BE · редактируемая гипотеза'}</h2><p class="card-sub">Предмет: ${esc(shown.product||shown.name)}</p></div><select class="search-field" style="width:190px" id="stage-select"><option value="current" ${stage==='current'?'selected':''}>AS-IS · текущая</option><option value="ideal" ${stage==='ideal'?'selected':''}>IDEAL · идеальная</option><option value="target" ${stage==='target'?'selected':''}>TO-BE · целевая</option></select></div>${stage!=='current'?`<div class="note" style="margin-bottom:13px"><b>Статус: гипотеза, а не подтверждённая карта.</b> В МУ-17 идеальная и целевая карты требуют отдельных решений, проверки реализуемости и расчётов. Здесь показан вариант графа с текущими сценарными параметрами; окончательное картирование — после замеров и экспертного согласования.</div>`:''}<div class="info-strip"><strong>Информационный поток (не производственные зависимости)</strong><div class="info-chips">${(shown.info_flow||[]).map(f=>`<span>${esc(f.message)}</span>`).join('')||'<span>Не задан</span>'}</div></div><div class="map-tools"><span>Перетаскивайте блоки мышью или пальцем в AS-IS и TO-BE. Меняются только координаты. Чтобы сохранить раскладку после перезагрузки, используйте «Экспорт JSON» и затем «Импорт».</span>${btn('↺ Авторасположение','reset-layout','small')}</div><div class="workspace" id="flow-space">${graphSvg(shown)}</div><div class="legend"><span><i></i>Поток материальных объектов</span><span><i class="hyp"></i>Материальная связь: гипотеза (оранжевая сплошная)</span><span><i class="info"></i>Информационный поток</span><span>CTн — нормативное время цикла</span></div><p class="card-sub">${current?'На AS-IS показан неизменный исходный базис. Перестановка блоков на экране не меняет его.':'TO-BE отображает текущее состояние редактируемой сценарной модели; изменения сравнивайте с AS-IS во вкладке «Сценарии». '}НЗП, фактические транспортировки, простои и ВПП не нанесены количественно: замеры не предоставлены. На защите нельзя выдавать этот предварительный AS-IS за результаты обследования.</p></div><div style="height:16px"></div>${nodeInspector(shown,current)}`;
+ return `${header('МУ-17-2023 · КАРТИРОВАНИЕ','Карта потока создания ценности',state.model.status==='synthetic_demo'?'Изображён синтетический маршрут. Вы можете добавить собственные операции и связи; это не карта обследованного предприятия.':'Разделяем материальные объекты и управление информацией. Технологические связи требуют экспертного подтверждения.',(current?btn('Перейти к TO-BE','goto-target','primary'):btn('＋ Добавить операцию','add-operation','')+btn('↳ Добавить связь','add-edge','')+btn('⊖ Удалить связь','remove-edge','')+btn('▶ Симуляция','run','primary')))}${disclaimer()}<div class="card"><div class="section-row"><div><h2 class="card-title">КПСЦ · ${stage==='current'?'AS-IS · исходная модель (базис)':stage==='ideal'?'идеальное состояние (концепция)':'TO-BE · редактируемая гипотеза'}</h2><p class="card-sub">Предмет: ${esc(shown.product||shown.name)}</p></div><select class="search-field" style="width:190px" id="stage-select"><option value="current" ${stage==='current'?'selected':''}>AS-IS · текущая</option><option value="ideal" ${stage==='ideal'?'selected':''}>IDEAL · идеальная</option><option value="target" ${stage==='target'?'selected':''}>TO-BE · целевая</option></select></div>${stage!=='current'?`<div class="note" style="margin-bottom:13px"><b>Статус: гипотеза, а не подтверждённая карта.</b> В МУ-17 идеальная и целевая карты требуют отдельных решений, проверки реализуемости и расчётов. Здесь показан вариант графа с текущими сценарными параметрами; окончательное картирование — после замеров и экспертного согласования.</div>`:''}<div class="info-strip"><strong>Информационный поток (не производственные зависимости)</strong><div class="info-chips">${(shown.info_flow||[]).map(f=>`<span>${esc(f.message)}</span>`).join('')||'<span>Не задан</span>'}</div></div><div class="map-tools"><span>Перетаскивайте блоки мышью или пальцем в AS-IS и TO-BE. Меняются только координаты. Раскладка сохраняется в памяти браузера автоматически; JSON-экспорт остаётся способом резервного переноса.</span>${btn('↺ Авторасположение','reset-layout','small')}</div><div class="workspace" id="flow-space">${graphSvg(shown)}</div><div class="legend"><span><i></i>Поток материальных объектов</span><span><i class="hyp"></i>Материальная связь: гипотеза (оранжевая сплошная)</span><span><i class="info"></i>Информационный поток</span><span>CTн — нормативное время цикла</span></div><p class="card-sub">${current?'На AS-IS показан неизменный исходный базис. Перестановка блоков на экране не меняет его.':'TO-BE отображает текущее состояние редактируемой сценарной модели; изменения сравнивайте с AS-IS во вкладке «Сценарии». '}НЗП, фактические транспортировки, простои и ВПП не нанесены количественно: замеры не предоставлены. На защите нельзя выдавать этот предварительный AS-IS за результаты обследования.</p></div><div style="height:16px"></div>${nodeInspector(shown,current)}`;
 }
 function floorView(){
  if(!isVenio(state.model))return `${header('ПЛАНИРОВКА / ДРУГОЕ ПРЕДПРИЯТИЕ','План пока не загружен','Фабрика VENIO-C не используется для этого синтетического процесса.',btn('Смотреть КПСЦ','goto-map','primary'))}${disclaimer()}${panel('Планировка другого предприятия','Привязка координат к узлам — отдельный источник данных',`<div class="empty">В этой модели нет подтверждённой планировки. Для построения диаграммы спагетти загрузите схему помещений и реальные перемещения логиста. Нельзя автоматически переносить расположение столов фабрики регулятора газа на другое предприятие.</div>`)}`;
@@ -159,12 +180,12 @@ function methodView(){return `${header('МУ-17-2023 / LEAN','Методичес
  ['Пропускная способность','Принятое количество / длительность моделирования','Вычисляется в сценарии'],
  ['AS-IS / IDEAL / TO-BE','Текущее / идеальное / реализуемое целевое состояния','Нужны подтверждения'],
  ].map(([a,b,c])=>`<tr><td><b>${a}</b></td><td>${b}</td><td><span class="table-status">${c}</span></td></tr>`).join('')}</tbody></table></div>`)}<div class="note" style="margin-top:16px"><b>Граница модели:</b> это ориентированный граф операций с объединением подсборок, расчетом очередей при партии и сценарием ресурсов. Это не полная производственная DES-модель: не проверены маршруты, не воспроизводятся возвраты брака, реальный логистический маршрут, МТО и финансовые потери. Их нельзя скрывать.</div>`;}
-async function run(quiet=false){try{state.running=true;state.result=await api('simulate',state.model);state.dirty=false;if(!quiet)toast('Сценарий рассчитан. Проверьте предупреждения к результату.');}catch(err){if(!quiet)toast('Ошибка модели: '+err.message);throw err;}finally{state.running=false;}}
+async function run(quiet=false){try{state.running=true;state.result=await api('simulate',state.model);state.dirty=false;persistWorkspace();if(!quiet)toast('Сценарий рассчитан. Проверьте предупреждения к результату.');}catch(err){if(!quiet)toast('Ошибка модели: '+err.message);throw err;}finally{state.running=false;}}
 async function applyModelChange(mutator,message){
  const proposed=clone(state.model);mutator(proposed);
  await api('validate',proposed);
  const result=await api('simulate',proposed);
- state.model=proposed;state.result=result;state.comparison=null;state.dirty=false;state.showStage='target';
+ state.model=proposed;state.result=result;state.comparison=null;state.dirty=false;state.showStage='target';persistWorkspace();
  render();toast(message+' · сервер пересчитал модель');
 }
 function redrawMapOnly(){
@@ -208,12 +229,12 @@ function finishDrag(event,cancel=false){
  if(cancel)return;
  if(d.moved){
   skipClickUntil=Date.now()+350;skipClickNode=d.id;
-  toast('Блок перемещён только на схеме. Экспортируйте JSON для сохранения после перезапуска.');
+  persistWorkspace();toast('Положение блока сохранено в памяти этого браузера.');
  }else{state.selected=d.id;render();}
 }
 document.addEventListener('pointerup',event=>finishDrag(event));
 document.addEventListener('pointercancel',event=>finishDrag(event,true));
-async function compareScenario(){try{state.comparison=await api('compare',{baseline:state.baseline,scenario:state.model});state.result=state.comparison.scenario;state.dirty=false;toast('Базовый и целевой сценарии пересчитаны.');render();}catch(e){toast(e.message);}}
+async function compareScenario(){try{state.comparison=await api('compare',{baseline:state.baseline,scenario:state.model});state.result=state.comparison.scenario;state.dirty=false;persistWorkspace();toast('Базовый и целевой сценарии пересчитаны.');render();}catch(e){toast(e.message);}}
 function exportFile(name,obj){const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),500);}
 function showModal(title,body,controls){const popup=document.createElement('div');popup.id='dialog';popup.style.cssText='position:fixed;inset:0;background:#111b34aa;z-index:20;display:grid;place-items:center;padding:20px';popup.innerHTML=`<div class="card" style="max-width:510px;width:100%;box-shadow:0 30px 80px #10193850"><h2>${title}</h2><div>${body}</div><div style="display:flex;gap:9px;justify-content:flex-end;margin-top:24px">${btn('Закрыть','close-dialog')}${controls||''}</div></div>`;document.body.appendChild(popup);}
 function addOperationDialog(){const options=state.model.edges.map((e,i)=>({...e,idx:i})).filter(e=>!state.model.nodes.some(n=>n.id===e.from&&n.kind==='quality')&&!state.model.nodes.some(n=>n.id===e.to&&n.kind==='customer')).map(e=>`<option value="${e.idx}">${esc(e.from)} → ${esc(e.to)}</option>`).join('');showModal('Добавить операцию в маршрут',`<p class="desc">Новый узел вставится между существующими узлами. Значения новой операции считаются синтетическими, пока не указаны источник и замеры.</p><div class="field" style="margin-top:16px"><label>Название операции</label><input id="new-name" maxlength="120" placeholder="Например, упаковка"></div><div class="field" style="margin-top:12px"><label>Время цикла, секунд</label><input id="new-cycle" type="number" min="1" step="1" value="60"></div><div class="field" style="margin-top:12px"><label>Вставить между</label><select id="new-parent">${options}</select></div>`,btn('Создать узел','confirm-add','primary'));}
@@ -223,20 +244,20 @@ function removeEdgeDialog(){
  const options=rows.map(e=>`<option value="${esc(e.from+'|'+e.to)}">${esc(e.from+' → '+e.to+' · '+(e.category==='supply'?'снабжение':'связь'))}</option>`).join('');
  showModal('Удалить материальную связь',`<p class="desc">Удаление меняет технологические зависимости, а не оформление карты. Сервер не позволит разорвать обязательный путь от склада до заказчика.</p><div class="field" style="margin-top:16px"><label>Выберите связь</label><select id="edge-remove">${options}</select></div>`,btn('Проверить и удалить','confirm-remove-edge','danger'));
 }
-async function loadWhich(endpoint){try{const data=await api(endpoint);state.model=clone(data);state.baseline=clone(data);state.baselineResult=null;state.comparison=null;state.selected=data.nodes.find(n=>n.kind==='operation')?.id;await run(true);state.baselineResult=clone(state.result);render();toast('Модель открыта: '+data.name);}catch(e){toast(e.message);}}
+async function loadWhich(endpoint){try{const data=await api(endpoint);state.model=clone(data);state.baseline=clone(data);state.initial=clone(data);state.baselineResult=null;state.comparison=null;state.selected=data.nodes.find(n=>n.kind==='operation')?.id;await run(true);state.baselineResult=clone(state.result);persistWorkspace();render();toast('Модель открыта: '+data.name);}catch(e){toast(e.message);}}
 document.addEventListener('click',async e=>{
- const view=e.target.closest('[data-view]');if(view){state.view=view.dataset.view;render();return;}
- const sel=e.target.closest('[data-node]');if(sel){if(Date.now()<skipClickUntil&&sel.dataset.node===skipClickNode)return;state.selected=sel.dataset.node;render();return;}
- const floor=e.target.closest('[data-select-node]');if(floor){state.selected=floor.dataset.selectNode;state.view='map';render();return;}
+ const view=e.target.closest('[data-view]');if(view){state.view=view.dataset.view;persistWorkspace();render();return;}
+ const sel=e.target.closest('[data-node]');if(sel){if(Date.now()<skipClickUntil&&sel.dataset.node===skipClickNode)return;state.selected=sel.dataset.node;persistWorkspace();render();return;}
+ const floor=e.target.closest('[data-select-node]');if(floor){state.selected=floor.dataset.selectNode;state.view='map';persistWorkspace();render();return;}
  const action=e.target.closest('[data-action]')?.dataset.action;if(!action)return;
  try{switch(action){
   case 'run':await run();render();break;
   case 'compare':await compareScenario();break;
-  case 'goto-map':state.view='map';render();break;
-  case 'goto-target':state.view='map';state.showStage='target';render();break;
-  case 'goto-scenarios':state.view='scenarios';render();break;
-  case 'goto-parameters':state.view='parameters';render();break;
-  case 'goto-sources':state.view='sources';render();break;
+  case 'goto-map':state.view='map';persistWorkspace();render();break;
+  case 'goto-target':state.view='map';state.showStage='target';persistWorkspace();render();break;
+  case 'goto-scenarios':state.view='scenarios';persistWorkspace();render();break;
+  case 'goto-parameters':state.view='parameters';persistWorkspace();render();break;
+  case 'goto-sources':state.view='sources';persistWorkspace();render();break;
   case 'generic':await loadWhich('generic');break;
   case 'original':await loadWhich('demo');break;
   case 'export':exportFile((state.model.id||'process')+'_model.json',state.model);break;
@@ -247,7 +268,7 @@ document.addEventListener('click',async e=>{
   case 'add-operation':addOperationDialog();break;
   case 'add-edge':addEdgeDialog();break;
   case 'remove-edge':removeEdgeDialog();break;
-  case 'reset-layout':delete state.model.kpsc_layout;redrawMapOnly();toast('Автоматическое расположение восстановлено; расчёты не менялись');break;
+  case 'reset-layout':delete state.model.kpsc_layout;persistWorkspace();redrawMapOnly();toast('Автоматическое расположение восстановлено; расчёты не менялись');break;
   case 'close-dialog':$('#dialog')?.remove();break;
   case 'confirm-remove-edge':{
    const [from,to]=($('#edge-remove')?.value||'').split('|');
@@ -276,7 +297,7 @@ document.addEventListener('click',async e=>{
 });
 document.addEventListener('change',async e=>{
  const t=e.target;
- if(t.id==='stage-select'){state.showStage=t.value;render();return;}
+ if(t.id==='stage-select'){state.showStage=t.value;persistWorkspace();render();return;}
  if(t.dataset.setting){
   const key=t.dataset.setting,raw=t.value.trim(),v=raw===''?null:Number(raw);
   if(v!==null&&!Number.isFinite(v)){toast('Некорректное значение');render();return;}
@@ -298,7 +319,7 @@ document.addEventListener('change',async e=>{
  }
  if(t.id==='import-file'){
   const file=t.files[0];if(!file)return;if(file.size>1024*1024){toast('Максимальный размер: 1 МБ');return;}
-  try{const model=JSON.parse(await file.text());await api('validate',model);state.model=model;state.baseline=clone(model);state.selected=model.nodes.find(n=>n.kind==='operation')?.id;state.comparison=null;state.baselineResult=null;await run(true);state.baselineResult=clone(state.result);render();toast('Модель импортирована и проверена');}catch(err){toast('Ошибка импорта: '+err.message);}finally{t.value='';}
+  try{const model=JSON.parse(await file.text());await api('validate',model);state.model=model;state.baseline=clone(model);state.initial=clone(model);state.selected=model.nodes.find(n=>n.kind==='operation')?.id;state.comparison=null;state.baselineResult=null;await run(true);state.baselineResult=clone(state.result);persistWorkspace();render();toast('Модель импортирована и проверена; сохранена в памяти этого браузера');}catch(err){toast('Ошибка импорта: '+err.message);}finally{t.value='';}
  }
 });
 window.addEventListener('keydown',e=>{

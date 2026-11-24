@@ -1,9 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="220" viewBox="0 0 980 220">
-<style>text{font-family:sans-serif;font-size:12px;fill:#102a43}</style>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="260" viewBox="0 0 1120 260">
+<style>text{font-family:Arial,sans-serif;font-size:14px;fill:#102a43}.title{font-size:18px;font-weight:700}</style>
 <rect width="100%" height="100%" fill="#f8fafc"/>
-<text x="16" y="24" font-size="16" font-weight="700">Состав прототипа</text>
-<text x="16" y="64">Браузер frontend → локальный Python API → проверка модели → движок backend/engine.py</text>
-<text x="16" y="90">Демо-модель: data/venio_factory.json. Таблицы защиты: data/venio_stage1.sqlite</text>
-<text x="16" y="116">1С, ERP и MES не подключены. 3D-тур не входит в этот этап.</text>
-<text x="16" y="150" fill="#334e68">Исходник схемы компонентов: analysis/diagrams/architecture.mmd</text>
+<text x="20" y="30" class="title">Компоненты PROCESS LAB · локальный режим направления A</text>
+<rect x="24" y="68" width="210" height="70" rx="10" fill="#e8edff" stroke="#5266d5"/><text x="44" y="98">Браузерный интерфейс</text><text x="44" y="120">формы, КПСЦ, дашборд</text>
+<rect x="440" y="68" width="220" height="70" rx="10" fill="#e8edff" stroke="#5266d5"/><text x="462" y="98">Локальный Python API</text><text x="462" y="120">валидация и расчёт</text>
+<rect x="850" y="68" width="230" height="70" rx="10" fill="#e7f7f1" stroke="#279278"/><text x="871" y="98">Движок симуляции</text><text x="871" y="120">сценарный результат</text>
+<path d="M234 103h196m234 0h170" stroke="#334e68" stroke-width="2" marker-end="url(#a)"/><defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3 0 6z" fill="#334e68"/></marker></defs>
+<rect x="190" y="176" width="330" height="52" rx="8" fill="#f0fdf4" stroke="#38a169"/><text x="208" y="198">localStorage: модель, базис, сценарий, раскладка</text><text x="208" y="217">только в том же браузере и профиле</text>
+<path d="M130 138v64h50" fill="none" stroke="#279278" stroke-width="2" marker-end="url(#a)"/>
+<text x="570" y="190">JSON-импорт/экспорт — перенос и резервная копия</text><text x="570" y="216">ERP / MES / 1С не подключены · SQLite — документальный снимок</text>
 </svg>

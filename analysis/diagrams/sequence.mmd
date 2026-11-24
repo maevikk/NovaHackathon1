@@ -1,12 +1,15 @@
 sequenceDiagram
     actor Analyst as Аналитик
     participant UI as Браузер
+    participant STORE as localStorage браузера
     participant API as API /backend/server.py
     participant VAL as Валидатор
     participant SIM as Расчётный движок
     Analyst->>UI: Ввести пароль
     UI->>API: POST /api/v1/login
     API-->>UI: Cookie сессии
+    UI->>STORE: Прочитать локальную модель и сценарий при открытии
+    STORE-->>UI: Базис, активная модель, параметры и раскладка
     Analyst->>UI: Запустить расчет
     UI->>API: POST /api/v1/simulate (модель JSON)
     API->>VAL: validate(model)
@@ -19,5 +22,6 @@ sequenceDiagram
       API->>SIM: simulate(model)
       SIM-->>API: Результат + warnings
       API-->>UI: HTTP 200 JSON
+      UI->>STORE: Сохранить рабочее состояние локально
       UI-->>Analyst: Dashboard и риски
     end
