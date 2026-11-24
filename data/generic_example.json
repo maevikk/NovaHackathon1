@@ -1,0 +1,84 @@
+{
+  "schema_version": 4,
+  "id": "generic-example",
+  "name": "Демонстрационный универсальный поток (синтетика)",
+  "product": "Учебное изделие X",
+  "status": "synthetic_demo",
+  "nodes": [
+    {
+      "id": "wh",
+      "kind": "source",
+      "name": "Склад сырья"
+    },
+    {
+      "id": "cut",
+      "kind": "operation",
+      "name": "Раскрой",
+      "cycle_s": 65,
+      "workers": 1,
+      "defect_pct": 0,
+      "evidence": "Синтетическое значение"
+    },
+    {
+      "id": "paint",
+      "kind": "operation",
+      "name": "Покрытие",
+      "cycle_s": 110,
+      "workers": 1,
+      "defect_pct": 0,
+      "evidence": "Синтетическое значение"
+    },
+    {
+      "id": "qc",
+      "kind": "quality",
+      "name": "Проверка",
+      "cycle_s": 20,
+      "workers": 1,
+      "defect_pct": 0,
+      "evidence": "Синтетическое значение"
+    },
+    {
+      "id": "client",
+      "kind": "customer",
+      "name": "Клиент"
+    }
+  ],
+  "edges": [
+    {
+      "from": "wh",
+      "to": "cut"
+    },
+    {
+      "from": "cut",
+      "to": "paint"
+    },
+    {
+      "from": "paint",
+      "to": "qc"
+    },
+    {
+      "from": "qc",
+      "to": "client"
+    }
+  ],
+  "settings": {
+    "shift_s": 1200,
+    "target_units": 10,
+    "release_units": 10,
+    "takt_s": 120,
+    "transport_batch": 2,
+    "transport_policy": "exact",
+    "logists": 1,
+    "travel_s": 0,
+    "seed": 2026,
+    "unit_material_cost": null,
+    "unit_sale_price": null,
+    "labor_cost_shift": null,
+    "logistic_cost_shift": null,
+    "overhead_cost_shift": null
+  },
+  "info_flow": [],
+  "uncertainties": [
+    "Все времена и маршруты вымышлены исключительно для демонстрации расширяемости"
+  ]
+}

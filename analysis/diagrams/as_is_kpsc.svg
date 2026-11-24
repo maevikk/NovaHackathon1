@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2250" height="940" viewBox="0 0 2250 940" role="img" aria-label="КПСЦ фабрики процессов">
+<defs><marker id="mat" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6" fill="none" stroke="#71829d" stroke-width="1.6"/></marker><marker id="info" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6" fill="none" stroke="#4b96a9" stroke-width="1.6"/></marker><pattern id="hatched" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line y2="8" stroke="#d2ab73" stroke-width="2"/></pattern></defs>
+<rect width="2250" height="940" fill="#f9fbfe"/><rect x="35" y="35" width="2180" height="865" rx="18" fill="#fff" stroke="#dbe4f2"/>
+<text x="70" y="87" fill="#1a2e4d" font-weight="800" font-size="28">PROCESS LAB · КПСЦ текущее состояние — предварительное</text>
+<text x="70" y="119" fill="#71819b" font-size="15">Продукт: пульт управления регулятора давления газа · МУ-17-2023 · CTн из рабочих стандартов</text>
+<rect x="65" y="150" width="440" height="74" rx="10" fill="#eaf6fa" stroke="#8dc5d2"/>
+<text x="85" y="176" font-size="15" fill="#377c8a" font-weight="700">Информационный поток</text>
+<text x="85" y="200" font-size="14" fill="#548996">Заказ 10 шт → план → задания / заявки логисту</text>
+<path d="M505 185 H2070" fill="none" stroke="#59a4b7" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#info)"/>
+<text x="1310" y="173" font-size="14" fill="#558da0">Инфоцентр ← выпуск, брак, отклонения (данные раунда не предоставлены)</text>
+<path d="M100 390 l40 -28 l45 28 v80 h-85 z" fill="#f0f4fa" stroke="#6f819a" stroke-width="2"/>
+<text x="141" y="407" text-anchor="middle" font-size="13" fill="#344764" font-weight="700">Склад</text>
+<text x="141" y="426" text-anchor="middle" font-size="12" fill="#344764">деталей</text>
+<rect x="75" y="506" width="167" height="57" rx="9" fill="#eff5fd" stroke="#a0b5d0"/>
+<text x="159" y="530" text-anchor="middle" font-size="13" fill="#48617d">Логист</text>
+<text x="159" y="550" text-anchor="middle" font-size="12" fill="#7891af">партия: 2 шт</text>
+<path d="M145 470 V505" stroke="#849ab5" stroke-width="2" marker-end="url(#mat)"/>
+<path d="M245 535 C390 535 450 685 1050 685" fill="none" stroke="#a7b8d3" stroke-width="2" marker-end="url(#mat)"/>
+<text x="610" y="705" fill="#8191ae" font-size="14">Комплектация на РМ 1–9; фактические рейсы и расстояния не измерены</text>
+<rect x="310" y="270" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="322" y="291" font-size="14" font-weight="800" fill="#405577">O1</text>
+<text x="322" y="313" font-size="14" fill="#243953">Корпус и низ</text>
+<text x="322" y="339" font-size="14" fill="#667c9d">CTн = 83 с</text>
+<rect x="545" y="270" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="557" y="291" font-size="14" font-weight="800" fill="#405577">O2</text>
+<text x="557" y="313" font-size="14" fill="#243953">Корпус и верх</text>
+<text x="557" y="339" font-size="14" fill="#667c9d">CTн = 66 с</text>
+<rect x="310" y="440" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="322" y="461" font-size="14" font-weight="800" fill="#405577">O3</text>
+<text x="322" y="483" font-size="14" fill="#243953">Дроссель</text>
+<text x="322" y="509" font-size="14" fill="#667c9d">CTн = 13 с</text>
+<rect x="805" y="335" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="817" y="356" font-size="14" font-weight="800" fill="#405577">O4</text>
+<text x="817" y="378" font-size="14" fill="#243953">Тарелка + дроссель</text>
+<text x="817" y="404" font-size="14" fill="#667c9d">CTн = 61 с</text>
+<rect x="310" y="610" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="322" y="631" font-size="14" font-weight="800" fill="#405577">O5</text>
+<text x="322" y="653" font-size="14" fill="#243953">Мембрана</text>
+<text x="322" y="679" font-size="14" fill="#667c9d">CTн = 35 с</text>
+<rect x="545" y="610" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="557" y="631" font-size="14" font-weight="800" fill="#405577">O6</text>
+<text x="557" y="653" font-size="14" fill="#243953">Пробка</text>
+<text x="557" y="679" font-size="14" fill="#667c9d">CTн = 39 с</text>
+<rect x="1060" y="410" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="1072" y="431" font-size="14" font-weight="800" fill="#405577">O7</text>
+<text x="1072" y="453" font-size="14" fill="#243953">Пульт управления</text>
+<text x="1072" y="479" font-size="14" fill="#667c9d">CTн = 102 с</text>
+<rect x="1300" y="410" width="178" height="82" rx="9" fill="#fff7eb" stroke="#c88b4e" stroke-width="2"/>
+<text x="1312" y="431" font-size="14" font-weight="800" fill="#405577">O8</text>
+<text x="1312" y="453" font-size="14" fill="#243953">6 болтов</text>
+<text x="1312" y="479" font-size="14" fill="#bc804b">CTн = 171 с</text>
+<rect x="1385" y="384" width="93" height="22" rx="5" fill="#fff0d9"/><text x="1392" y="399" font-size="12" fill="#ab6c33">Риск такта</text>
+<rect x="1540" y="410" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="1552" y="431" font-size="14" font-weight="800" fill="#405577">O9</text>
+<text x="1552" y="453" font-size="14" fill="#243953">Штуцеры / патрубок</text>
+<text x="1552" y="479" font-size="14" fill="#667c9d">CTн = 82 с</text>
+<rect x="1780" y="410" width="178" height="82" rx="9" fill="#f7f9fe" stroke="#7b8cad" stroke-width="2"/>
+<text x="1792" y="431" font-size="14" font-weight="800" fill="#405577">QC</text>
+<text x="1792" y="453" font-size="14" fill="#243953">Контроль ОТК</text>
+<text x="1792" y="479" font-size="14" fill="#667c9d">CTн = 22 с</text>
+<path d="M488 315 C516.5 315 516.5 315 545 315" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M723 315 C764.0 315 764.0 380 805 380" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M488 485 C646.5 485 646.5 380 805 380" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M983 380 C1021.5 380 1021.5 455 1060 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M488 655 C774.0 655 774.0 455 1060 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M723 655 C891.5 655 891.5 455 1060 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M1238 455 C1269.0 455 1269.0 455 1300 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M1478 455 C1509.0 455 1509.0 455 1540 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M1718 455 C1749.0 455 1749.0 455 1780 455" fill="none" stroke="#9d9b88" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#mat)"/>
+<path d="M1958 455 H2035" stroke="#71829d" stroke-width="2" marker-end="url(#mat)"/>
+<path d="M2040 420 l60 -22 l60 22 v68 h-120 z" fill="#f9f1dc" stroke="#bfaa7d" stroke-width="2"/>
+<text x="2100" y="450" font-size="16" fill="#775d36" text-anchor="middle" font-weight="700">Клиент</text>
+<path d="M740 774 c0 -21 10 -31 23 -31 s23 10 23 31" fill="url(#hatched)" stroke="#c7a374" stroke-width="2"/>
+<text x="798" y="763" font-size="14" fill="#93784d">НЗП: ? шт (нет измерений)</text>
+<rect x="70" y="807" width="2110" height="62" rx="10" fill="#fff8ed" stroke="#efdcb8"/>
+<text x="90" y="830" font-size="14" fill="#846845" font-weight="700">Важно: межоперационный маршрут пунктиром — предположение по стандартам. Стрелки не являются замеренным маршрутом логиста.</text>
+<text x="90" y="853" font-size="14" fill="#846845">Такт: 120 с/шт · ВПП фактическое: нет данных · Ожидание: нет данных · Циклы: только нормативы рабочих стандартов.</text>
+</svg>

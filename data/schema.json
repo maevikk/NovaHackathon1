@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://processlab.local/schema/v4",
+  "title": "PROCESS LAB ProcessModel v4",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "nodes",
+    "edges",
+    "settings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 4
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 80,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "kind": {
+            "enum": [
+              "source",
+              "operation",
+              "quality",
+              "customer"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "cycle_s": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 7200
+          },
+          "workers": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 16
+          },
+          "defect_pct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "cycle_basis": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 260,
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to"
+        ],
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "verification": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "required": [
+        "shift_s",
+        "target_units",
+        "release_units",
+        "takt_s",
+        "transport_batch",
+        "transport_policy",
+        "logists",
+        "travel_s"
+      ],
+      "properties": {
+        "shift_s": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "target_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "release_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "takt_s": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "transport_batch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "logists": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "travel_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "transport_policy": {
+          "enum": [
+            "max",
+            "exact"
+          ]
+        },
+        "unit_material_cost": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unit_sale_price": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "labor_cost_shift": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "logistic_cost_shift": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "overhead_cost_shift": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "info_flow": {
+      "type": "array"
+    }
+  }
+}

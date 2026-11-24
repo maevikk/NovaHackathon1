@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2140" height="900" viewBox="0 0 2140 900">
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:sans-serif}</style>
+<text x="24" y="28" font-size="18" font-weight="700" fill="#102a43">Идеальное состояние. Ориентир, не план смены</text>
+<text x="24" y="48" font-size="12" fill="#334e68">Секунды идеального состояния не заданы: замера и подтверждённого решения нет.</text>
+<text x="24" y="68" font-size="12" fill="#334e68">Такт 120 с = 1200 с / 10 шт. Партия логиста: 2. ВПП, НЗП, брак, рейс и деньги: не измерено.</text>
+<g font-size="11" fill="#243b53">
+<rect x="24" y="84" width="14" height="10" fill="#fff" stroke="#1f2933"/>
+<text x="42" y="93">операция</text>
+<line x1="120" y1="89" x2="160" y2="89" stroke="#243b53" stroke-width="2"/>
+<text x="166" y="93">материальный поток</text>
+<line x1="320" y1="89" x2="360" y2="89" stroke="#c05621" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="366" y="93">сборка, нужна сверка</text>
+<line x1="540" y1="89" x2="580" y2="89" stroke="#2b6cb0" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="586" y="93">информация</text>
+<polygon points="760,84 774,98 746,98" fill="none" stroke="#243b53"/>
+<text x="780" y="93">запас не измерен</text>
+</g>
+<rect x="24" y="250" width="168" height="60" rx="4" fill="#f0f4f8" stroke="#1f2933" stroke-width="1.4"/>
+<text x="32" y="268" font-size="12" font-weight="700" fill="#102a43">Склад</text>
+<text x="32" y="286" font-size="11" fill="#243b53">поставщик комплектов</text>
+<text x="32" y="302" font-size="11" fill="#243b53">рейс: не измерен</text>
+<polygon points="94,318 108,334 80,334" fill="none" stroke="#243b53"/>
+<text x="112" y="330" font-size="10" fill="#627d98">не измерено</text>
+<rect x="230" y="130" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="238" y="148" font-size="12" font-weight="700" fill="#102a43">1. Корпус и нижняя крышка</text>
+<text x="238" y="166" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="238" y="182" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="238" y="198" font-size="11" fill="#243b53">значение не задано</text>
+<text x="238" y="214" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="300,230 314,246 286,246" fill="none" stroke="#243b53"/>
+<text x="318" y="242" font-size="10" fill="#627d98">не измерено</text>
+<rect x="230" y="300" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="238" y="318" font-size="12" font-weight="700" fill="#102a43">3. Сборка дросселя</text>
+<text x="238" y="336" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="238" y="352" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="238" y="368" font-size="11" fill="#243b53">значение не задано</text>
+<text x="238" y="384" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="300,400 314,416 286,416" fill="none" stroke="#243b53"/>
+<text x="318" y="412" font-size="10" fill="#627d98">не измерено</text>
+<rect x="230" y="470" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="238" y="488" font-size="12" font-weight="700" fill="#102a43">5. Сборка мембраны</text>
+<text x="238" y="506" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="238" y="522" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="238" y="538" font-size="11" fill="#243b53">значение не задано</text>
+<text x="238" y="554" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="300,570 314,586 286,586" fill="none" stroke="#243b53"/>
+<text x="318" y="582" font-size="10" fill="#627d98">не измерено</text>
+<rect x="230" y="640" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="238" y="658" font-size="12" font-weight="700" fill="#102a43">6. Сборка пробки</text>
+<text x="238" y="676" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="238" y="692" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="238" y="708" font-size="11" fill="#243b53">значение не задано</text>
+<text x="238" y="724" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="300,740 314,756 286,756" fill="none" stroke="#243b53"/>
+<text x="318" y="752" font-size="10" fill="#627d98">не измерено</text>
+<rect x="460" y="130" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="468" y="148" font-size="12" font-weight="700" fill="#102a43">2. Корпус и верхняя крышка</text>
+<text x="468" y="166" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="468" y="182" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="468" y="198" font-size="11" fill="#243b53">значение не задано</text>
+<text x="468" y="214" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="530,230 544,246 516,246" fill="none" stroke="#243b53"/>
+<text x="548" y="242" font-size="10" fill="#627d98">не измерено</text>
+<rect x="700" y="230" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="708" y="248" font-size="12" font-weight="700" fill="#102a43">4. Тарелка и дроссель</text>
+<text x="708" y="266" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="708" y="282" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="708" y="298" font-size="11" fill="#243b53">значение не задано</text>
+<text x="708" y="314" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="770,330 784,346 756,346" fill="none" stroke="#243b53"/>
+<text x="788" y="342" font-size="10" fill="#627d98">не измерено</text>
+<rect x="940" y="360" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="948" y="378" font-size="12" font-weight="700" fill="#102a43">7. Сборка пульта</text>
+<text x="948" y="396" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="948" y="412" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="948" y="428" font-size="11" fill="#243b53">значение не задано</text>
+<text x="948" y="444" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="1010,460 1024,476 996,476" fill="none" stroke="#243b53"/>
+<text x="1028" y="472" font-size="10" fill="#627d98">не измерено</text>
+<rect x="1180" y="360" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="1188" y="378" font-size="12" font-weight="700" fill="#102a43">8. Шесть болтов</text>
+<text x="1188" y="396" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="1188" y="412" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="1188" y="428" font-size="11" fill="#243b53">значение не задано</text>
+<text x="1188" y="444" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="1250,460 1264,476 1236,476" fill="none" stroke="#243b53"/>
+<text x="1268" y="472" font-size="10" fill="#627d98">не измерено</text>
+<rect x="1420" y="360" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="1428" y="378" font-size="12" font-weight="700" fill="#102a43">9. Штуцеры и патрубок</text>
+<text x="1428" y="396" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="1428" y="412" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="1428" y="428" font-size="11" fill="#243b53">значение не задано</text>
+<text x="1428" y="444" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="1490,460 1504,476 1476,476" fill="none" stroke="#243b53"/>
+<text x="1508" y="472" font-size="10" fill="#627d98">не измерено</text>
+<rect x="1660" y="360" width="168" height="92" rx="4" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="1668" y="378" font-size="12" font-weight="700" fill="#102a43">ОТК</text>
+<text x="1668" y="396" font-size="11" fill="#243b53">норма есть в стандарте</text>
+<text x="1668" y="412" font-size="11" fill="#243b53">ориентир: не выше такта</text>
+<text x="1668" y="428" font-size="11" fill="#243b53">значение не задано</text>
+<text x="1668" y="444" font-size="11" fill="#243b53">НЗП: не измерено</text>
+<polygon points="1730,460 1744,476 1716,476" fill="none" stroke="#243b53"/>
+<text x="1748" y="472" font-size="10" fill="#627d98">не измерено</text>
+<rect x="1900" y="360" width="168" height="60" rx="4" fill="#f0f4f8" stroke="#1f2933" stroke-width="1.4"/>
+<text x="1908" y="378" font-size="12" font-weight="700" fill="#102a43">Клиент</text>
+<text x="1908" y="396" font-size="11" fill="#243b53">забирает по 1 шт.</text>
+<text x="1908" y="412" font-size="11" fill="#243b53">заказ: 10 за смену</text>
+<polygon points="1970,428 1984,444 1956,444" fill="none" stroke="#243b53"/>
+<text x="1988" y="440" font-size="10" fill="#627d98">не измерено</text>
+<line x1="192" y1="286" x2="230" y2="166" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="460" y2="166" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="230" y2="336" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="700" y2="266" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="230" y2="506" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="230" y2="676" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="940" y2="396" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="1180" y2="396" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="192" y1="286" x2="1420" y2="396" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="398" y1="166" x2="460" y2="166" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="628" y1="166" x2="700" y2="266" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="398" y1="336" x2="700" y2="266" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="868" y1="266" x2="940" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="398" y1="506" x2="940" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="398" y1="676" x2="940" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="1108" y1="396" x2="1180" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="1348" y1="396" x2="1420" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="1588" y1="396" x2="1660" y2="396" stroke="#c05621" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="1828" y1="396" x2="1900" y2="396" stroke="#243b53" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="1900" y1="340" x2="700" y2="120" stroke="#2b6cb0" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<text x="1100" y="112" font-size="11" fill="#2b6cb0">информация: заказ 10 шт. → начальник производства → склад и стандарты. Факт ОТК отдельно. Деньги бланка-примера не используются.</text>
+</svg>

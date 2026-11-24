@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor Analyst as Аналитик
+    participant UI as Браузер
+    participant API as API /backend/server.py
+    participant VAL as Валидатор
+    participant SIM as Расчётный движок
+    Analyst->>UI: Ввести пароль
+    UI->>API: POST /api/v1/login
+    API-->>UI: Cookie сессии
+    Analyst->>UI: Запустить расчет
+    UI->>API: POST /api/v1/simulate (модель JSON)
+    API->>VAL: validate(model)
+    alt ошибка модели
+      VAL-->>API: ModelError
+      API-->>UI: HTTP 422 + причина
+      UI-->>Analyst: Корректная ошибка
+    else валидная модель
+      VAL-->>API: DAG / settings
+      API->>SIM: simulate(model)
+      SIM-->>API: Результат + warnings
+      API-->>UI: HTTP 200 JSON
+      UI-->>Analyst: Dashboard и риски
+    end

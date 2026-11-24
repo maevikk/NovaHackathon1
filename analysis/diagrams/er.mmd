@@ -1,0 +1,58 @@
+erDiagram
+    PROCESS_MODEL ||--o{ NODE : contains
+    PROCESS_MODEL ||--o{ MATERIAL_EDGE : contains
+    PROCESS_MODEL ||--o{ INFO_SIGNAL : contains
+    PROCESS_MODEL ||--|| SCENARIO_SETTINGS : configures
+    PROCESS_MODEL ||--o{ SCENARIO_RESULT : produces
+    NODE ||--o{ MATERIAL_EDGE : source_or_target
+    NODE ||--o{ EVIDENCE_REFERENCE : supported_by
+    SCENARIO_RESULT ||--o{ OPERATION_RESULT : includes
+    NODE ||--o{ OPERATION_RESULT : references
+    PROCESS_MODEL {
+        string id PK
+        string name
+        string product
+        string status
+        int schema_version
+    }
+    NODE {
+        string id PK
+        string name
+        string kind
+        float cycle_s
+        int workers
+        float defect_pct
+        string cycle_basis
+    }
+    MATERIAL_EDGE {
+        string from FK
+        string to FK
+        string verification
+        string category
+    }
+    INFO_SIGNAL {
+        string from
+        string to
+        string message
+    }
+    SCENARIO_SETTINGS {
+        int shift_s
+        int takt_s
+        int transport_batch
+        float travel_s
+    }
+    EVIDENCE_REFERENCE {
+        string document
+        string page
+        string status
+    }
+    SCENARIO_RESULT {
+        int accepted
+        float throughput_units_hour
+        float theoretical_critical_path_s
+    }
+    OPERATION_RESULT {
+        int completed
+        float utilization_pct
+        float capacity_units_hour
+    }

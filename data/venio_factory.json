@@ -1,0 +1,376 @@
+{
+  "schema_version": 4,
+  "id": "venio-c",
+  "name": "Учебная фабрика — сборка пульта управления регулятора давления газа",
+  "product": "VENIO-C / пульт управления регулятора давления газа",
+  "status": "illustrative_normative_scenario",
+  "sources": [
+    "0. Общее описание Фабрики процессов.pdf",
+    "1. Комплектация рабочих мест.pdf",
+    "2. Детали в разбивке по рабочим местам.pdf",
+    "3. Стандарты выполнения операций.pdf",
+    "6. Планировка Фабрики процессов.pdf",
+    "МУ-17-2023"
+  ],
+  "nodes": [
+    {
+      "id": "wh",
+      "kind": "source",
+      "name": "Склад комплектующих",
+      "x": 35,
+      "y": 320
+    },
+    {
+      "id": "o1",
+      "kind": "operation",
+      "name": "01 · Корпус пилота и нижняя крышка",
+      "cycle_s": 83,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 33–34",
+      "x": 190,
+      "y": 150,
+      "floor_m": [
+        11.5,
+        4.6
+      ]
+    },
+    {
+      "id": "o2",
+      "kind": "operation",
+      "name": "02 · Корпус пилота и верхняя крышка",
+      "cycle_s": 66,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 35–36",
+      "x": 395,
+      "y": 150,
+      "floor_m": [
+        5.8,
+        1.7
+      ]
+    },
+    {
+      "id": "o3",
+      "kind": "operation",
+      "name": "03 · Сборка дросселя",
+      "cycle_s": 13,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 37–38",
+      "x": 600,
+      "y": 150,
+      "floor_m": [
+        11.7,
+        1.7
+      ]
+    },
+    {
+      "id": "o4",
+      "kind": "operation",
+      "name": "04 · Установка тарелки и дросселя",
+      "cycle_s": 61,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 39–41",
+      "x": 805,
+      "y": 150,
+      "floor_m": [
+        9.0,
+        1.8
+      ]
+    },
+    {
+      "id": "o5",
+      "kind": "operation",
+      "name": "05 · Сборка мембраны",
+      "cycle_s": 35,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 42",
+      "x": 1010,
+      "y": 150,
+      "floor_m": [
+        7.0,
+        4.6
+      ]
+    },
+    {
+      "id": "o6",
+      "kind": "operation",
+      "name": "06 · Сборка пробки",
+      "cycle_s": 39,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 43",
+      "x": 190,
+      "y": 415,
+      "floor_m": [
+        14.4,
+        1.6
+      ]
+    },
+    {
+      "id": "o7",
+      "kind": "operation",
+      "name": "07 · Сборка пульта управления",
+      "cycle_s": 102,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 44–46",
+      "x": 395,
+      "y": 415,
+      "floor_m": [
+        4.7,
+        4.6
+      ]
+    },
+    {
+      "id": "o8",
+      "kind": "operation",
+      "name": "08 · Установка шести болтов",
+      "cycle_s": 171,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 47",
+      "x": 600,
+      "y": 415,
+      "floor_m": [
+        14.5,
+        4.6
+      ]
+    },
+    {
+      "id": "o9",
+      "kind": "operation",
+      "name": "09 · Установка штуцеров и патрубка",
+      "cycle_s": 82,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 48–49",
+      "x": 805,
+      "y": 415,
+      "floor_m": [
+        2.3,
+        1.7
+      ]
+    },
+    {
+      "id": "qc",
+      "kind": "quality",
+      "name": "10 · Контрольная операция (ОТК)",
+      "cycle_s": 22,
+      "workers": 1,
+      "defect_pct": 0,
+      "cycle_basis": "work_standard_not_observed",
+      "evidence": "3. Стандарты выполнения операций, стр. 50",
+      "x": 1010,
+      "y": 415,
+      "floor_m": [
+        1.8,
+        4.6
+      ]
+    },
+    {
+      "id": "client",
+      "kind": "customer",
+      "name": "Заказчик",
+      "x": 1330,
+      "y": 340
+    }
+  ],
+  "edges": [
+    {
+      "from": "wh",
+      "to": "o1",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o2",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o3",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o4",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o5",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o6",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o7",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o8",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "wh",
+      "to": "o9",
+      "category": "supply",
+      "evidence": "Рабочий стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "o1",
+      "to": "o2",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o2",
+      "to": "o4",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o3",
+      "to": "o4",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o4",
+      "to": "o7",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o5",
+      "to": "o7",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o6",
+      "to": "o7",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o7",
+      "to": "o8",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o8",
+      "to": "o9",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "o9",
+      "to": "qc",
+      "category": "assembly",
+      "verification": "requires_expert_confirmation",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    },
+    {
+      "from": "qc",
+      "to": "client",
+      "category": "handoff",
+      "verification": "documented_control",
+      "evidence": "Гипотеза по последовательности подсборок из рабочих стандартов, требует сверки на ФП"
+    }
+  ],
+  "settings": {
+    "shift_s": 1200,
+    "target_units": 10,
+    "release_units": 10,
+    "takt_s": 120,
+    "transport_batch": 2,
+    "transport_policy": "exact",
+    "logists": 1,
+    "travel_s": 0,
+    "seed": 2026,
+    "unit_material_cost": null,
+    "unit_sale_price": null,
+    "labor_cost_shift": null,
+    "logistic_cost_shift": null,
+    "overhead_cost_shift": null
+  },
+  "info_flow": [
+    {
+      "from": "client",
+      "to": "planning",
+      "message": "Потребность 10 шт./смена",
+      "evidence": "Общее описание, стр. 1–2"
+    },
+    {
+      "from": "planning",
+      "to": "wh",
+      "message": "Комплектация/заявки логиста",
+      "evidence": "Стандарт логиста, стр. 51–53"
+    },
+    {
+      "from": "planning",
+      "to": "operators",
+      "message": "Задание и стандарт",
+      "evidence": "Общее описание, стр. 1–2"
+    },
+    {
+      "from": "qc",
+      "to": "planning",
+      "message": "Факт, брак, отклонения",
+      "evidence": "Инфоцентр, стр. 10–12"
+    }
+  ],
+  "floor": {
+    "width_m": 6.15,
+    "length_m": 18.4,
+    "table_width_m": 1.0,
+    "table_depth_m": 0.7,
+    "table_height_m": 0.82,
+    "positions_basis": "примерная привязка по плану, без геодезической точности",
+    "layout_source": "6. Планировка Фабрики процессов, стр. 1"
+  },
+  "uncertainties": [
+    "Технологические переходы уточнить у экспертов",
+    "Фактические циклы и простои не замерены",
+    "Фактическое начальное НЗП и остатки неизвестны",
+    "Время и маршрут логиста неизвестны",
+    "Брак и его возврат/доработка неизвестны",
+    "Ставки затрат и выручки не предоставлены"
+  ]
+}
